@@ -604,11 +604,15 @@
   <script>
     const GRUPO_VIP_LINK = "https://chat.whatsapp.com/Gg24Ngypev1DPZgSnRnjME?mode=gi_t";
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function ativarGrupoVip() {
       document.querySelectorAll("[data-vip]").forEach(el => {
         el.href = GRUPO_VIP_LINK;
+        el.target = "_blank";
+        el.rel = "noopener noreferrer";
       });
+    }
 
+    function ativarCarrosseis() {
       document.querySelectorAll("[data-carousel]").forEach(carousel => {
         const slider = carousel.querySelector("[data-results-slider]");
         const prev = carousel.querySelector("[data-slider-prev]");
@@ -632,6 +636,26 @@
           });
         }
       });
+    }
+
+    function ativarFallbackDasImagens() {
+      document.querySelectorAll("img[data-fallbacks]").forEach(img => {
+        const lista = img.dataset.fallbacks.split(",").map(item => item.trim());
+        let index = 0;
+
+        img.addEventListener("error", () => {
+          if (index < lista.length) {
+            img.src = lista[index];
+            index++;
+          }
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      ativarGrupoVip();
+      ativarCarrosseis();
+      ativarFallbackDasImagens();
     });
   </script>
 
@@ -679,35 +703,31 @@
 
         <div class="hero-card">
           <div class="results-carousel" data-carousel>
-            <button class="photo-arrow" type="button" data-slider-prev aria-label="Foto anterior">
-              ‹
-            </button>
+            <button class="photo-arrow" type="button" data-slider-prev aria-label="Foto anterior">‹</button>
 
             <div class="results-slider" data-results-slider>
               <figure class="result-slide">
-                <img src="resultado-1.png" alt="Resultado Lainex 1" loading="eager">
+                <img src="resultado-1.png" data-fallbacks="5.png,assets/resultado-1.png,assets/5.png" alt="Resultado Lainex 1" loading="eager">
                 <figcaption>Resultados</figcaption>
               </figure>
 
               <figure class="result-slide">
-                <img src="resultado-2.png" alt="Resultado Lainex 2" loading="eager">
+                <img src="resultado-2.png" data-fallbacks="2.png,assets/resultado-2.png,assets/2.png" alt="Resultado Lainex 2" loading="eager">
                 <figcaption>Resultados</figcaption>
               </figure>
 
               <figure class="result-slide">
-                <img src="resultado-3.png" alt="Resultado Lainex 3" loading="eager">
+                <img src="resultado-3.png" data-fallbacks="3.png,assets/resultado-3.png,assets/3.png" alt="Resultado Lainex 3" loading="eager">
                 <figcaption>Resultados</figcaption>
               </figure>
 
               <figure class="result-slide">
-                <img src="resultado-4.png" alt="Resultado Lainex 4" loading="eager">
+                <img src="resultado-4.png" data-fallbacks="4.png,assets/resultado-4.png,assets/4.png" alt="Resultado Lainex 4" loading="eager">
                 <figcaption>Resultados</figcaption>
               </figure>
             </div>
 
-            <button class="photo-arrow" type="button" data-slider-next aria-label="Próxima foto">
-              ›
-            </button>
+            <button class="photo-arrow" type="button" data-slider-next aria-label="Próxima foto">›</button>
           </div>
         </div>
       </div>
@@ -785,35 +805,31 @@
 
         <div class="hero-card">
           <div class="results-carousel" data-carousel>
-            <button class="photo-arrow" type="button" data-slider-prev aria-label="Foto anterior">
-              ‹
-            </button>
+            <button class="photo-arrow" type="button" data-slider-prev aria-label="Foto anterior">‹</button>
 
             <div class="results-slider" data-results-slider>
               <figure class="result-slide">
-                <img src="resultado-1.png" alt="Resultado Lainex 1">
+                <img src="resultado-1.png" data-fallbacks="5.png,assets/resultado-1.png,assets/5.png" alt="Resultado Lainex 1">
                 <figcaption>Resultados</figcaption>
               </figure>
 
               <figure class="result-slide">
-                <img src="resultado-2.png" alt="Resultado Lainex 2">
+                <img src="resultado-2.png" data-fallbacks="2.png,assets/resultado-2.png,assets/2.png" alt="Resultado Lainex 2">
                 <figcaption>Resultados</figcaption>
               </figure>
 
               <figure class="result-slide">
-                <img src="resultado-3.png" alt="Resultado Lainex 3">
+                <img src="resultado-3.png" data-fallbacks="3.png,assets/resultado-3.png,assets/3.png" alt="Resultado Lainex 3">
                 <figcaption>Resultados</figcaption>
               </figure>
 
               <figure class="result-slide">
-                <img src="resultado-4.png" alt="Resultado Lainex 4">
+                <img src="resultado-4.png" data-fallbacks="4.png,assets/resultado-4.png,assets/4.png" alt="Resultado Lainex 4">
                 <figcaption>Resultados</figcaption>
               </figure>
             </div>
 
-            <button class="photo-arrow" type="button" data-slider-next aria-label="Próxima foto">
-              ›
-            </button>
+            <button class="photo-arrow" type="button" data-slider-next aria-label="Próxima foto">›</button>
           </div>
         </div>
       </div>
